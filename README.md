@@ -12,6 +12,6 @@ This business network defines:
 `package`
 
 **Transactions:**
-`createPackage` `splitPackage` `approveTransaction` `transferPackage` `disturbteFromPackage`
+`createPackage` `splitPackage` `approveTransaction` `transferPackage` `disturbteFromPackage` `openPackage`
 
 The `createPackage` function is called when a packge is being added .`splitPackage` is when a packge is going to be splited to multiple pages . `approveTransaction` for approving transactions in govermental scenario you will alawys have such regualtions .`transferPackage` is for moving a packge from point A to point B `disturbteFromPackage` is when the packges are being opened so the food is given to the citzens .

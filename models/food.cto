@@ -1,0 +1,102 @@
+/**
+ * Defines a data model for a blind vehicle auction
+ */
+namespace org.acme.food.Subsidy
+
+
+asset package  identified by id {
+  o String id
+  o String packgingType
+  o String location
+  o Double numberOfItems
+  o String currentHolder
+  o String[] approvedBy
+  o String[] factorsParticipants
+  o Double initalCost
+  o Double currentCost
+  o Double expectedCostAfterArrival
+  o String currency
+  --> package parentPackage
+  --> package childrenPackage
+  o String rfid
+  o String weight
+  o String weightUnit
+  o String trackingNumber
+  o String[] images
+  o String lastSeenTimeStamp
+  o Boolean isOpen 
+  // --> packgeIntaior creator
+  // --> approver[] approvals 
+  // --> transporter lastTransporter
+}
+
+
+// enum ListingState {
+//   o FOR_SALE
+//   o RESERVE_NOT_MET
+//   o SOLD
+// }
+
+
+
+abstract participant User identified by email {
+  o String email
+  o String firstName
+  o String lastName
+}
+
+participant packageInitiator identified by id {
+  o Double balance
+  o String id
+}
+participant transportor identified by id {
+  o Double balance
+  o String id
+
+}
+
+participant packageSpliter identified by id {
+  o Double balance
+  o String id
+
+}
+participant distributor identified by id {
+  o Double balance
+  o String id
+
+}
+participant regulator  identified by id {
+  o Double balance
+  o String id
+
+}
+participant approver identified by id  {
+  o Double balance
+  o String id
+
+}
+
+transaction createPackage {
+  o Double bidPrice
+}
+
+transaction openPackage {
+  o Double bidPrice
+}
+
+transaction splitPackage {
+  o Double bidPrice
+}
+transaction approveTransaction {
+  o Double bidPrice
+}
+transaction transferPackage {
+  o Double bidPrice
+}
+transaction disturbteFromPackage {
+  o Double bidPrice
+}
+
+
+
+
