@@ -14,20 +14,23 @@ asset package  identified by id {
   o String[] factorsParticipants
   o Double initalCost
   o Double currentCost
-  o Double expectedCostAfterArrival
+  o Double expectedCostAfterArrival optional
   o String currency
-  --> package parentPackage
-  --> package childrenPackage
-  o String rfid
+  --> package parentPackage optional
+  --> package[] childrenPackage optional
+  o String rfidOfThePackage optional
+  o String[] rfidOfItemsIncluded optional
   o String weight
-  o String weightUnit
-  o String trackingNumber
-  o String[] images
-  o String lastSeenTimeStamp
-  o Boolean isOpen 
-  // --> packgeIntaior creator
-  // --> approver[] approvals 
-  // --> transporter lastTransporter
+  o String weightUnit 
+  o String trackingNumber 
+  o String[] images optional
+  o Double lastSeenTimeStamp
+  o Boolean isOpen default=false
+  --> packageInitiator creator
+  --> approver[] approvals 
+  --> transporter[] transporter
+  --> transporter lastTransporter optional
+  --> approver lastApprover optional
 }
 
 
@@ -38,42 +41,71 @@ asset package  identified by id {
 // }
 
 
-
-abstract participant User identified by email {
+participant capitalHolder identified by id {
+  o String id
+  --> capitalHolder createdBy
+  o String name
   o String email
-  o String firstName
-  o String lastName
+
+
 }
 
 participant packageInitiator identified by id {
   o Double balance
+  o String name
+  o String email
+  o String typeOfIntity
+  o Double amountOfMoneyHave
   o String id
+  --> capitalHolder createdBy
+
 }
-participant transportor identified by id {
-  o Double balance
+participant transporter identified by id {
   o String id
+  o String location 
+  o String name
+  o String email
+  o String entityRelated
+  --> capitalHolder createdBy optional
+  --> package[] currentHoldingPackges
+  o String roadRelated
 
 }
 
 participant packageSpliter identified by id {
-  o Double balance
   o String id
-
+  o String location 
+  o String name
+  o String email
+  o String entityRelated
+  --> capitalHolder createdBy optional
+  --> package[] currentHoldingPackges
+  o String roadRelated
+  
 }
 participant distributor identified by id {
-  o Double balance
   o String id
-
+  o String location 
+  o String name
+  o String email
+  o String entityRelated
+  --> capitalHolder createdBy optional
+  --> package[] currentHoldingPackges
+  o String roadRelated
 }
 participant regulator  identified by id {
-  o Double balance
   o String id
-
+  o String location 
+  o String name
+  o String email
+  o String entityRelated
 }
 participant approver identified by id  {
-  o Double balance
   o String id
-
+  o String location 
+  o String name
+  o String email
+  o String entityRelated
 }
 
 transaction createPackage {
