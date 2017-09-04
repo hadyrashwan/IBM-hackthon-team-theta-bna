@@ -108,6 +108,10 @@ participant approver identified by id  {
   o String entityRelated
 }
 
+transaction giveMoneyToPackageSpliter {
+  o Double bidPrice
+}
+
 transaction createPackage {
   o Double bidPrice
 }
