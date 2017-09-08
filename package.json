@@ -47,7 +47,7 @@
   },
   "license-check-config": {
     "src": [
-      "**/*.js",
+      "**/*.ts",
       "!./coverage/**/*",
       "!./node_modules/**/*",
       "!./out/**/*",

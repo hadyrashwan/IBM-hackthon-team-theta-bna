@@ -4,34 +4,42 @@
 namespace org.acme.food.Subsidy
 
 
-asset package  identified by id {
+asset package identified by id {
   o String id
   o String packgingType
   o String location
   o Double numberOfItems
   o String currentHolder
   o String[] approvedBy
-  o String[] factorsParticipants
-  o Double initalCost
-  o Double currentCost
-  o Double expectedCostAfterArrival optional
-  o String currency
+    // o String[] factorsParticipants
+    // o Double initalCost
+    // o Double currentCost
+    // o Double price
+    // o Double expectedCostAfterArrival optional
+    // o String currency
   --> package parentPackage optional
   --> package[] childrenPackage optional
   o String rfidOfThePackage optional
   o String[] rfidOfItemsIncluded optional
   o String weight
-  o String weightUnit 
-  o String trackingNumber 
-  o String[] images optional
+  o String weightUnit
+  // o String trackingNumber 
+  // o String[] images optional
   o Double lastSeenTimeStamp
-  o Boolean isOpen default=false
+  o Boolean isOpen
+  default = false
   --> packageInitiator creator
-  --> approver[] approvals 
-  --> transporter[] transporter
+  // --> approver[] approvals 
+  --> transporter[] transporter optional
   --> transporter lastTransporter optional
-  --> approver lastApprover optional
+  // --> approver lastApprover optional
 }
+
+// asset wallet identified by id {
+//   o String id
+//   o Double blanace 
+//   -->
+// }
 
 
 // enum ListingState {
@@ -51,7 +59,6 @@ participant capitalHolder identified by id {
 }
 
 participant packageInitiator identified by id {
-  o Double balance
   o String name
   o String email
   o String typeOfIntity
@@ -62,47 +69,38 @@ participant packageInitiator identified by id {
 }
 participant transporter identified by id {
   o String id
-  o String location 
+  o String location
   o String name
   o String email
   o String entityRelated
+  o String[] privlages
   --> capitalHolder createdBy optional
   --> package[] currentHoldingPackges
   o String roadRelated
 
 }
 
-participant packageSpliter identified by id {
-  o String id
-  o String location 
-  o String name
-  o String email
-  o String entityRelated
-  --> capitalHolder createdBy optional
-  --> package[] currentHoldingPackges
-  o String roadRelated
-  
-}
 participant distributor identified by id {
   o String id
-  o String location 
+  o String location
   o String name
   o String email
   o String entityRelated
+  o String[] privlages
   --> capitalHolder createdBy optional
   --> package[] currentHoldingPackges
   o String roadRelated
 }
-participant regulator  identified by id {
+participant regulator identified by id {
   o String id
-  o String location 
+  o String location
   o String name
   o String email
   o String entityRelated
 }
-participant approver identified by id  {
+participant approver identified by id {
   o String id
-  o String location 
+  o String location
   o String name
   o String email
   o String entityRelated
@@ -113,26 +111,41 @@ transaction giveMoneyToPackageSpliter {
 }
 
 transaction createPackage {
-  o Double bidPrice
+  o String packgaType
+  o String location
+  o Double weight
+  o String weightUnit
+  o String[] rfidOfItemsIncluded
+  o Double numberOfItems
 }
 
 transaction openPackage {
   o Double bidPrice
 }
 
-transaction splitPackage {
-  o Double bidPrice
-}
+// transaction splitPackage {
+//   o Double bidPrice
+// }
 transaction approveTransaction {
-  o Double bidPrice
+  o String location
+  o String[] rfidOfItemsIncluded
+  --> package packageSent
+  --> transporter transporter
+
 }
 transaction transferPackage {
-  o Double bidPrice
+  --> package packageSent
+  o String source
+  o String destination
+  o Double weight
+  o String location
+  o String[] rfidOfItemsIncluded
+    --> transporter transporter
 }
 transaction disturbteFromPackage {
-  o Double bidPrice
+  o String location
+  --> package packageSent
+  o String nationalID
+  o String uniqueNumber
+
 }
-
-
-
-
