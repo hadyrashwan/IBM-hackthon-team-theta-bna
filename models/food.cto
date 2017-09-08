@@ -108,6 +108,8 @@ participant approver identified by id {
 
 transaction giveMoney {
   o Double money
+  o String description
+  o String CapitalId
   --> wallet walletId
 }
 
