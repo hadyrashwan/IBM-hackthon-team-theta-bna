@@ -8,15 +8,15 @@ asset package identified by id {
   o String id
   o String packgingType
   o String location
-  o Double numberOfItems
+  o Long numberOfItems
   o String currentHolder
   o String[] approvedBy
     // o String[] factorsParticipants
-    // o Double initalCost
-    // o Double currentCost
-    // o Double price
-    // o Double expectedCostAfterArrival optional
-    // o String currency
+    o Double initalCost
+    o Double currentCost optional
+    o Double price optional
+    o Double expectedCostAfterArrival optional
+    o String currency optional
   --> package parentPackage optional
   --> package[] childrenPackage optional
   o String rfidOfThePackage optional
@@ -25,7 +25,7 @@ asset package identified by id {
   o String weightUnit
   // o String trackingNumber 
   // o String[] images optional
-  o Double lastSeenTimeStamp
+  o Long lastSeenTimeStamp
   o Boolean isOpen
   default = false
   --> packageInitiator creator
@@ -33,6 +33,7 @@ asset package identified by id {
   --> transporter[] transporter optional
   --> transporter lastTransporter optional
   // --> approver lastApprover optional
+  --> transporter initalTransporter
 }
 
 asset wallet identified by id {
@@ -49,7 +50,7 @@ participant capitalHolder identified by id {
   o String id
   o String name
   o String email
-  -->wallet wallet optional
+  --> wallet wallet optional
 }
 
 participant packageInitiator identified by id {
@@ -72,7 +73,6 @@ participant transporter identified by id {
   --> package[] currentHoldingPackges
   --> wallet wallet optional
   o String roadRelated
-
 }
 
 participant distributor identified by id {
@@ -128,7 +128,6 @@ transaction approveTransaction {
   o String[] rfidOfItemsIncluded
   --> package packageSent
   --> transporter transporter
-
 }
 transaction transferPackage {
   --> package packageSent
@@ -138,11 +137,12 @@ transaction transferPackage {
   o String location
   o String[] rfidOfItemsIncluded
     --> transporter transporter
+    --> transporter receiver
 }
 transaction disturbteFromPackage {
   o String location
   --> package packageSent
   o String nationalID
   o String uniqueNumber
-
+  --> distributor distributor
 }
