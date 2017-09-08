@@ -34,11 +34,13 @@ asset package identified by id {
   --> transporter lastTransporter optional
   // --> approver lastApprover optional
   --> transporter initalTransporter
+  --> transporter expectedToReceive
 }
 
 asset wallet identified by id {
   o String id
   o Double blanace 
+  o Double toClaimMoney
 }
 // enum ListingState {
 //   o FOR_SALE
@@ -116,6 +118,7 @@ transaction createPackage {
   o String weightUnit
   o String[] rfidOfItemsIncluded
   o Double numberOfItems
+  --> packageInitiator packageInitiator
 }
 
 // transaction openPackage {
