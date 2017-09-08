@@ -35,26 +35,21 @@ asset package identified by id {
   // --> approver lastApprover optional
 }
 
-// asset wallet identified by id {
-//   o String id
-//   o Double blanace 
-//   -->
-// }
-
-
+asset wallet identified by id {
+  o String id
+  o Double blanace 
+}
 // enum ListingState {
 //   o FOR_SALE
 //   o RESERVE_NOT_MET
 //   o SOLD
 // }
 
-
 participant capitalHolder identified by id {
   o String id
   o String name
   o String email
-
-
+  -->wallet wallet optional
 }
 
 participant packageInitiator identified by id {
@@ -64,7 +59,7 @@ participant packageInitiator identified by id {
   o Double amountOfMoneyHave
   o String id
   --> capitalHolder createdBy
-
+  --> wallet wallet optional
 }
 participant transporter identified by id {
   o String id
@@ -75,6 +70,7 @@ participant transporter identified by id {
   o String[] privlages
   --> capitalHolder createdBy optional
   --> package[] currentHoldingPackges
+  --> wallet wallet optional
   o String roadRelated
 
 }
@@ -88,6 +84,7 @@ participant distributor identified by id {
   o String[] privlages
   --> capitalHolder createdBy optional
   --> package[] currentHoldingPackges
+  --> wallet wallet optional
   o String roadRelated
 }
 participant regulator identified by id {
@@ -96,6 +93,7 @@ participant regulator identified by id {
   o String name
   o String email
   o String entityRelated
+  --> wallet wallet optional
 }
 participant approver identified by id {
   o String id
@@ -103,10 +101,12 @@ participant approver identified by id {
   o String name
   o String email
   o String entityRelated
+  --> wallet wallet optional
 }
 
-transaction giveMoneyToPackageSpliter {
-  o Double bidPrice
+transaction giveMoney {
+  o Double money
+  --> wallet walletId
 }
 
 transaction createPackage {
@@ -118,12 +118,10 @@ transaction createPackage {
   o Double numberOfItems
 }
 
-transaction openPackage {
-  o Double bidPrice
-}
+// transaction openPackage {
+// }
 
 // transaction splitPackage {
-//   o Double bidPrice
 // }
 transaction approveTransaction {
   o String location
