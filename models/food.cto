@@ -51,7 +51,6 @@ asset package identified by id {
 
 participant capitalHolder identified by id {
   o String id
-  --> capitalHolder createdBy
   o String name
   o String email
 
