@@ -26,15 +26,14 @@ asset package identified by id {
   // o String trackingNumber 
   // o String[] images optional
   o Long lastSeenTimeStamp
-  o Boolean isOpen
-  default = false
+  o Boolean isOpen default = false
   --> packageInitiator creator
   // --> approver[] approvals 
   --> transporter[] transporter optional
-  --> transporter lastTransporter optional
+  // --> transporter lastTransporter optional
   // --> approver lastApprover optional
   --> transporter initalTransporter
-  --> transporter expectedToReceive
+  // --> transporter expectedToReceive
 }
 
 asset wallet identified by id {
