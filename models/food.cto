@@ -117,11 +117,11 @@ participant approver identified by id {
   o String entityRelated
 }
 
-transaction giveMoney {
-  o Double money
-  o String description
-  o String CapitalId
-}
+// transaction giveMoney {
+//   o Double money
+//   o String description
+//   o String CapitalId
+// }
 
 // transaction createPackage {
 //   o String packgaType
