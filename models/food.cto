@@ -21,7 +21,7 @@ asset package identified by id {
   --> package[] childrenPackage optional
   o String rfidOfThePackage optional
   o String[] rfidOfItemsIncluded optional
-  o String weight
+  o Long weight
   o String weightUnit
   // o String trackingNumber 
   // o String[] images optional
@@ -149,7 +149,7 @@ transaction transferPackage {
   --> package packageSent
   o String source
   o String destination
-  o Double weight
+  o Long weight
   o String location
   o String[] rfidOfItemsIncluded
   --> transporter transporter
