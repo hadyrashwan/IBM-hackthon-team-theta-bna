@@ -9,12 +9,13 @@ asset package identified by id {
   o String packgingType
   o String location optional
   o Long numberOfItems
-    // o String[] factorsParticipants
-    o Double initalCost optional
-    o Double currentCost optional
-    o Double price optional
-    o Double expectedCostAfterArrival optional
-    o String currency optional
+  o Boolean warningFlag optional
+  // o String[] factorsParticipants
+  o Double initalCost optional
+  o Double currentCost optional
+  o Double price optional
+  o Double expectedCostAfterArrival optional
+  o String currency optional
   --> package parentPackage optional
   --> package[] childrenPackage optional
   o String rfidOfThePackage optional
@@ -107,6 +108,7 @@ participant transporter identified by id {
   o String name
   o String email
   o String entityRelated
+  o String destination optional
   o String[] privlages optional
   --> capitalHolder createdBy optional
   --> package[] currentHoldingPackges optional
@@ -157,13 +159,10 @@ participant approver identified by id {
 // transaction splitPackage { // split packga to 2 packges
 // }
 transaction approveTransaction {
-  o String location
-  o String source
-  o String[] rfidOfItemsIncluded
+  o String[] rfidOfItemsIncluded optional
   o Long weight
   --> package packageSent
   --> transporter transporter optional
-  --> transporter receiver optional
 }
 transaction disturbte {
   o String nationalID
