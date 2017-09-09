@@ -12,7 +12,7 @@ asset package identified by id {
   o String currentHolder
   o String[] approvedBy
     // o String[] factorsParticipants
-    o Double initalCost
+    o Double initalCost optional
     o Double currentCost optional
     o Double price optional
     o Double expectedCostAfterArrival optional
@@ -49,15 +49,18 @@ asset capital identified by id {
   --> packageInitiator[] packageInitiators
   --> transporter[] transporters
   --> distributor[] distributors
+  --> capitalHolder capitalHolder
+
 }
 
 asset  bill identified by id {
   o String id
-  o String amount
+  o Double amount
   o String description
   o String typeOftParticipan
   o String participanID
   --> capital capital
+  --> regulator regulator
 }
 // enum ListingState {
 //   o FOR_SALE
