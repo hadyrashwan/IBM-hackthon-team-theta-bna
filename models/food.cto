@@ -32,8 +32,8 @@ asset package identified by id {
   --> transporter[] transporter optional
   // --> transporter lastTransporter optional
   // --> approver lastApprover optional
-  --> transporter initalTransporter
-  // --> transporter expectedToReceive
+  --> transporter initalTransporter optional
+  --> transporter expectedToReceive optional
 }
 asset capital identified by id {
   o String id
@@ -137,10 +137,7 @@ participant approver identified by id {
 //   --> packageInitiator packageInitiator
 // }
 
-// transaction openPackage {
-// }
-
-// transaction splitPackage {
+// transaction splitPackage { // split packga to 2 packges
 // }
 transaction approveTransaction {
   o String location
@@ -160,6 +157,7 @@ transaction transferPackage {
 }
 transaction disturbteFromPackage {
   o String location
+  o Boolean isPackgeOpen
   --> package packageSent
   o String nationalID
   o String uniqueNumber
