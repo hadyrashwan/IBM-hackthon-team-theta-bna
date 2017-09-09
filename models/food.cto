@@ -35,11 +35,29 @@ asset package identified by id {
   --> transporter initalTransporter
   // --> transporter expectedToReceive
 }
-
-asset wallet identified by id {
+asset capital identified by id {
   o String id
-  o Double blanace 
-  o Double toClaimMoney
+  o String description
+  o String amountTotal
+  o String amountSpendByDistributor
+  o String amountSpendByPackageInitiator
+  o String amountSpendByTransporter
+  o String amountSpendByApprovers
+  o String amountSpendByRegulators
+  --> regulator[] regulators
+  --> approver[] approvers
+  --> packageInitiator[] packageInitiators
+  --> transporter[] transporters
+  --> distributor[] distributors
+}
+
+asset  bill identified by id {
+  o String id
+  o String amount
+  o String description
+  o String typeOftParticipan
+  o String participanID
+  --> capital capital
 }
 // enum ListingState {
 //   o FOR_SALE
@@ -51,7 +69,6 @@ participant capitalHolder identified by id {
   o String id
   o String name
   o String email
-  --> wallet wallet optional
 }
 
 participant packageInitiator identified by id {
@@ -60,8 +77,7 @@ participant packageInitiator identified by id {
   o String typeOfIntity
   o Double amountOfMoneyHave
   o String id
-  --> capitalHolder createdBy
-  --> wallet wallet optional
+  --> capitalHolder createdBy optional
 }
 participant transporter identified by id {
   o String id
@@ -72,7 +88,6 @@ participant transporter identified by id {
   o String[] privlages
   --> capitalHolder createdBy optional
   --> package[] currentHoldingPackges
-  --> wallet wallet optional
   o String roadRelated
 }
 
@@ -85,7 +100,6 @@ participant distributor identified by id {
   o String[] privlages
   --> capitalHolder createdBy optional
   --> package[] currentHoldingPackges
-  --> wallet wallet optional
   o String roadRelated
 }
 participant regulator identified by id {
@@ -94,7 +108,6 @@ participant regulator identified by id {
   o String name
   o String email
   o String entityRelated
-  --> wallet wallet optional
 }
 participant approver identified by id {
   o String id
@@ -102,25 +115,23 @@ participant approver identified by id {
   o String name
   o String email
   o String entityRelated
-  --> wallet wallet optional
 }
 
 transaction giveMoney {
   o Double money
   o String description
   o String CapitalId
-  --> wallet walletId
 }
 
-transaction createPackage {
-  o String packgaType
-  o String location
-  o Double weight
-  o String weightUnit
-  o String[] rfidOfItemsIncluded
-  o Double numberOfItems
-  --> packageInitiator packageInitiator
-}
+// transaction createPackage {
+//   o String packgaType
+//   o String location
+//   o Double weight
+//   o String weightUnit
+//   o String[] rfidOfItemsIncluded
+//   o Double numberOfItems
+//   --> packageInitiator packageInitiator
+// }
 
 // transaction openPackage {
 // }
@@ -140,8 +151,8 @@ transaction transferPackage {
   o Double weight
   o String location
   o String[] rfidOfItemsIncluded
-    --> transporter transporter
-    --> transporter receiver
+  --> transporter transporter
+  --> transporter receiver
 }
 transaction disturbteFromPackage {
   o String location
