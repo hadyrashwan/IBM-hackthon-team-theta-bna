@@ -7,10 +7,8 @@ namespace org.acme.food.Subsidy
 asset package identified by id {
   o String id
   o String packgingType
-  o String location
+  o String location optional
   o Long numberOfItems
-  o String currentHolder
-  o String[] approvedBy
     // o String[] factorsParticipants
     o Double initalCost optional
     o Double currentCost optional
@@ -20,12 +18,13 @@ asset package identified by id {
   --> package parentPackage optional
   --> package[] childrenPackage optional
   o String rfidOfThePackage optional
-  o String[] rfidOfItemsIncluded optional
+  o String[] rfidOfItemsIncluded 
   o Long weight
+  o Long weightCracked optional
   o String weightUnit
   // o String trackingNumber 
   // o String[] images optional
-  o Long lastSeenTimeStamp
+  o Long lastSeenTimeStamp 
   o Boolean isOpen default = false
   --> packageInitiator creator
   // --> approver[] approvals 
@@ -44,6 +43,7 @@ asset capital identified by id {
   o String amountSpendByTransporter
   o String amountSpendByApprovers
   o String amountSpendByRegulators
+  o Boolean warningFlag
   --> regulator[] regulators
   --> approver[] approvers
   --> packageInitiator[] packageInitiators
@@ -51,6 +51,25 @@ asset capital identified by id {
   --> distributor[] distributors
   --> capitalHolder capitalHolder
 
+}
+
+asset alarm identified by id {
+  o String id
+  o String reason
+  o String transactionID
+}
+
+asset complain identified by id{
+  o String id
+  o String complain
+  o String transactionID optional
+}
+
+asset claimMoney identified by id{
+  o String id
+  o String complain
+  o String money
+  o String transactionID optional
 }
 
 asset  bill identified by id {
@@ -78,8 +97,7 @@ participant capitalHolder identified by id {
 participant packageInitiator identified by id {
   o String name
   o String email
-  o String typeOfIntity
-  o Double amountOfMoneyHave
+  o String typeOfEntity
   o String id
   --> capitalHolder createdBy optional
 }
@@ -89,9 +107,9 @@ participant transporter identified by id {
   o String name
   o String email
   o String entityRelated
-  o String[] privlages
+  o String[] privlages optional
   --> capitalHolder createdBy optional
-  --> package[] currentHoldingPackges
+  --> package[] currentHoldingPackges optional
   o String roadRelated
 }
 
@@ -101,10 +119,9 @@ participant distributor identified by id {
   o String name
   o String email
   o String entityRelated
-  o String[] privlages
+  o String[] privlages optional
   --> capitalHolder createdBy optional
-  --> package[] currentHoldingPackges
-  o String roadRelated
+  --> package[] currentHoldingPackges optional
 }
 participant regulator identified by id {
   o String id
@@ -141,25 +158,17 @@ participant approver identified by id {
 // }
 transaction approveTransaction {
   o String location
-  o String[] rfidOfItemsIncluded
-  --> package packageSent
-  --> transporter transporter
-}
-transaction transferPackage {
-  --> package packageSent
   o String source
-  o String destination
-  o Long weight
-  o String location
   o String[] rfidOfItemsIncluded
-  --> transporter transporter
-  --> transporter receiver
-}
-transaction disturbteFromPackage {
-  o String location
-  o Boolean isPackgeOpen
+  o Long weight
   --> package packageSent
+  --> transporter transporter optional
+  --> transporter receiver optional
+}
+transaction disturbte {
   o String nationalID
-  o String uniqueNumber
+  o String uniqueNumber optional
+  o String assestType
+  o Double numberOfItems
   --> distributor distributor
 }
