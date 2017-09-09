@@ -61,6 +61,7 @@ asset  bill identified by id {
   o String participanID
   --> capital capital
   --> regulator regulator
+  --> capitalHolder capitalHolder
 }
 // enum ListingState {
 //   o FOR_SALE
