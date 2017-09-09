@@ -3,7 +3,7 @@
     "composer": "^0.11.0 || ^0.12.0"
   },
   "name": "theta-food-subsidy",
-  "version": "0.1.8",
+  "version": "0.3.1",
   "description": "Car Auction Business Network",
   "networkImage": "https://img0.etsystatic.com/051/0/7217227/il_340x270.737963148_86cx.jpg",
   "networkImageanimated": "https://img0.etsystatic.com/051/0/7217227/il_340x270.737963148_86cx.jpg",
